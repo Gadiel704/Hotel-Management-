@@ -69,3 +69,5 @@ int main() {
                 cout << "1. Book a room\n2. Check out\n3. Display room status\n4. Exit\n";
 
                         cin >> choice;
+
+                        switch (choice) {
