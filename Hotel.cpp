@@ -62,3 +62,4 @@ public:
 
 int main() {
         HotelManagement hotel(10);
+            int choice;
