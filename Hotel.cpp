@@ -70,4 +70,6 @@ int main() {
 
                         cin >> choice;
 
-                        switch (choice) {
+                        switch (choice) 
+                            
+                                string name, type;
