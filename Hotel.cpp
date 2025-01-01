@@ -10,3 +10,6 @@ struct Room {
     bool isOccupied;
     string guestName;
 };
+class HotelManagement {
+private:
+    vector<Room> rooms;
