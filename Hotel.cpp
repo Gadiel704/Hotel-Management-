@@ -10,16 +10,18 @@ struct Room {
     bool isOccupied;
     string guestName;
 };
+
 class HotelManagement {
 private:
     vector<Room> rooms;
 
-    public:
+public:
     HotelManagement(int numRooms) {
         for (int i = 1; i <= numRooms; ++i) {
             rooms.push_back({i, (i % 2 == 0 ? "Double" : "Single"), false, ""});
         }
     }
+
     void bookRoom(const string& guestName, const string& roomType) {
         for (auto& room : rooms) {
             if (!room.isOccupied && room.type == roomType) {
@@ -31,7 +33,8 @@ private:
         }
         cout << "No available " << roomType << " rooms.\n";
     }
-        void checkOut(int roomNumber) {
+
+    void checkOut(int roomNumber) {
         for (auto& room : rooms) {
             if (room.number == roomNumber) {
                 if (room.isOccupied) {
@@ -47,7 +50,3 @@ private:
         }
         cout << "Invalid room number.\n";
     }
-
-        void displayRooms() {
-        cout << "\nRoom Status:\n";
-        for (const auto& room : rooms) {
