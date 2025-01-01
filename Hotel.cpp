@@ -73,3 +73,4 @@ int main() {
                         switch (choice) 
                             
                                 string name, type;
+                                 cout << "Enter guest name: ";
