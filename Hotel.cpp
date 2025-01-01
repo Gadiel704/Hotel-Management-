@@ -27,7 +27,7 @@ public:
             if (!room.isOccupied && room.type == roomType) {
                 room.isOccupied = true;
                 room.guestName = guestName;
-                cout << "Room " << room.number << " booked for " << guestName << ".\n";
+                 cout << "Room " << room.number << " booked for " << guestName << ".\n";
                 return;
             }
         }
@@ -60,7 +60,7 @@ public:
     }
 };
 
-int main() {
+int main() 
         HotelManagement hotel(10);
             int choice;
 
@@ -76,3 +76,27 @@ int main() {
                                  cout << "Enter guest name: ";
                                   cin.ignore();
                                   getline(cin, name);
+                                  cout << "Enter room type (Single/Double): ";
+                                  cin >> type;
+                                   hotel.bookRoom(name, type);
+            break;
+        }
+        case 2: {
+            int roomNumber;
+            cout << "Enter room number to check out: ";
+            cin >> roomNumber;
+            hotel.checkOut(roomNumber);
+            break;
+        }
+        case 3:
+            hotel.displayRooms();
+            break;
+            default:
+            cout << "Invalid choice. Try again.\n";
+        }
+         } while (choice != 4);
+
+    return 0;
+}
+
+        
