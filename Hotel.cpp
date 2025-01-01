@@ -74,3 +74,4 @@ int main() {
                             
                                 string name, type;
                                  cout << "Enter guest name: ";
+                                  cin.ignore();
