@@ -64,4 +64,6 @@ int main() {
         HotelManagement hotel(10);
             int choice;
 
-            do {
+            
+                cout << "\nHotel Management System:\n";
+                cout << "1. Book a room\n2. Check out\n3. Display room status\n4. Exit\n";
