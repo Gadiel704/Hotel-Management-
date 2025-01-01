@@ -61,3 +61,4 @@ public:
 };
 
 int main() {
+        HotelManagement hotel(10);
