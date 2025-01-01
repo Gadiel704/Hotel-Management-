@@ -50,3 +50,12 @@ public:
         }
         cout << "Invalid room number.\n";
     }
+        void displayRooms() {
+        cout << "\nRoom Status:\n";
+        for (const auto& room : rooms) {
+
+                        cout << "Room " << room.number << " (" << room.type << "): "
+                 << (room.isOccupied ? "Occupied by " + room.guestName : "Available") << "\n";
+        }
+    }
+};
