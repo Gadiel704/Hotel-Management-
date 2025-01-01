@@ -80,7 +80,7 @@ int main()
                                   cin >> type;
                                    hotel.bookRoom(name, type);
             break;
-        }
+        
         case 2: {
             int roomNumber;
             cout << "Enter room number to check out: ";
@@ -93,10 +93,10 @@ int main()
             break;
             default:
             cout << "Invalid choice. Try again.\n";
-        }
-         } while (choice != 4);
+        
+          while (choice != 4);
 
     return 0;
-}
+
 
         
