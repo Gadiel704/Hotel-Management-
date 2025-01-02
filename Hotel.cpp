@@ -1,102 +1,131 @@
 #include <iostream>
-#include <vector>
 #include <string>
-
 using namespace std;
 
+// Room structure to store room details
 struct Room {
-    int number;
-    string type;
-    bool isOccupied;
+    int roomNumber;
+    string roomType;
+    bool isBooked;
     string guestName;
 };
 
 class HotelManagement {
 private:
-    vector<Room> rooms;
+    Room rooms[5]; // Array to store room details
 
 public:
-    HotelManagement(int numRooms) {
-        for (int i = 1; i <= numRooms; ++i) {
-            rooms.push_back({i, (i % 2 == 0 ? "Double" : "Single"), false, ""});
+    HotelManagement() {
+        // Initialize rooms
+        for (int i = 0; i < 5; i++) {
+            rooms[i].roomNumber = i + 1;
+            rooms[i].roomType = (i % 2 == 0) ? "Single" : "Double";
+            rooms[i].isBooked = false;
+            rooms[i].guestName = "";
         }
     }
 
-    void bookRoom(const string& guestName, const string& roomType) {
-        for (auto& room : rooms) {
-            if (!room.isOccupied && room.type == roomType) {
-                room.isOccupied = true;
-                room.guestName = guestName;
-                 cout << "Room " << room.number << " booked for " << guestName << ".\n";
-                return;
+    void displayAvailableRooms() {
+        cout << "\nAvailable Rooms:\n";
+        for (const auto &room : rooms) {
+            if (!room.isBooked) {
+                cout << "Room Number: " << room.roomNumber
+                     << ", Room Type: " << room.roomType << endl;
             }
         }
-        cout << "No available " << roomType << " rooms.\n";
     }
 
-    void checkOut(int roomNumber) {
-        for (auto& room : rooms) {
-            if (room.number == roomNumber) {
-                if (room.isOccupied) {
-                    room.isOccupied = false;
-                    room.guestName = "";
-                    cout << "Room " << roomNumber << " is now available.\n";
-                    return;
-                } else {
-                    cout << "Room " << roomNumber << " is already vacant.\n";
-                    return;
-                }
+    void bookRoom() {
+        int roomNumber;
+        string guestName;
+
+        cout << "\nEnter Room Number to Book: ";
+        cin >> roomNumber;
+        cin.ignore(); // Clear the input buffer
+
+        if (roomNumber < 1 || roomNumber > 5) {
+            cout << "Invalid Room Number. Please try again.\n";
+            return;
+        }
+
+        if (rooms[roomNumber - 1].isBooked) {
+            cout << "Room already booked. Please choose another room.\n";
+        } else {
+            cout << "Enter Guest Name: ";
+            getline(cin, guestName);
+
+            rooms[roomNumber - 1].isBooked = true;
+            rooms[roomNumber - 1].guestName = guestName;
+
+            cout << "Room " << roomNumber << " booked successfully for " << guestName << ".\n";
+        }
+    }
+
+    void displayBookedRooms() {
+        cout << "\nBooked Rooms:\n";
+        for (const auto &room : rooms) {
+            if (room.isBooked) {
+                cout << "Room Number: " << room.roomNumber
+                     << ", Room Type: " << room.roomType
+                     << ", Guest Name: " << room.guestName << endl;
             }
         }
-        cout << "Invalid room number.\n";
     }
-        void displayRooms() {
-        cout << "\nRoom Status:\n";
-        for (const auto& room : rooms) {
 
-                        cout << "Room " << room.number << " (" << room.type << "): "
-                 << (room.isOccupied ? "Occupied by " + room.guestName : "Available") << "\n";
+    void cancelBooking() {
+        int roomNumber;
+        cout << "\nEnter Room Number to Cancel Booking: ";
+        cin >> roomNumber;
+
+        if (roomNumber < 1 || roomNumber > 5) {
+            cout << "Invalid Room Number. Please try again.\n";
+            return;
+        }
+
+        if (!rooms[roomNumber - 1].isBooked) {
+            cout << "Room is not booked.\n";
+        } else {
+            rooms[roomNumber - 1].isBooked = false;
+            rooms[roomNumber - 1].guestName = "";
+            cout << "Booking for Room " << roomNumber << " has been canceled.\n";
         }
     }
 };
 
-int main() 
-        HotelManagement hotel(10);
-            int choice;
+int main() {
+    HotelManagement hotel;
+    int choice;
 
-            
-                cout << "\nHotel Management System:\n";
-                cout << "1. Book a room\n2. Check out\n3. Display room status\n4. Exit\n";
+    do {
+        cout << "\n--- Hotel Management System ---\n";
+        cout << "1. Display Available Rooms\n";
+        cout << "2. Book a Room\n";
+        cout << "3. Display Booked Rooms\n";
+        cout << "4. Cancel Booking\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-                        cin >> choice;
-
-                        switch (choice) 
-                            
-                                string name, type;
-                                 cout << "Enter guest name: ";
-                                  cin.ignore();
-                                  getline(cin, name);
-                                  cout << "Enter room type (Single/Double): ";
-                                  cin >> type;
-                                   hotel.bookRoom(name, type);
-            break;
-        
-        case 2: {
-            int roomNumber;
-            cout << "Enter room number to check out: ";
-            cin >> roomNumber;
-            hotel.checkOut(roomNumber);
-            break;
-        }
-        case 3:
-            hotel.displayRooms();
-            break;
+        switch (choice) {
+            case 1:
+                hotel.displayAvailableRooms();
+                break;
+            case 2:
+                hotel.bookRoom();
+                break;
+            case 3:
+                hotel.displayBookedRooms();
+                break;
+            case 4:
+                hotel.cancelBooking();
+                break;
+            case 5:
+                cout << "Exiting... Thank you!\n";
+                break;
             default:
-            cout << "Invalid choice. Try again.\n";
-        
-          while (choice != 4);
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 5);
 
     return 0;
-
-
-        
+}
